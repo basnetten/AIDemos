@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GameMath.Vectors;
 
 namespace SteeringBehaviors
@@ -7,19 +8,28 @@ namespace SteeringBehaviors
 	{
 		public Vector2 Target { get; set; }
 
-		public Vector2 GetDesiredVelocity(MovingEntity entity)
+		public SeekSteeringBehavior()
 		{
-			return GetDesiredVelocity(entity, Target);
+			Target = new Vector2();
 		}
 
-		public static Vector2 GetDesiredVelocity(MovingEntity entity, Vector2 target)
+		public SteeringData CalculateData(MovingEntity entity)
 		{
-			Vector2 targetOffset = target - entity.Position;
+			Vector2 targetOffset = Target - entity.Position;
 			Vector2 targetDirection = targetOffset.Normalize();
 			Vector2 desiredVelocity = targetDirection * entity.MaxVelocity;
 			Vector2 deltaVelocity = desiredVelocity - entity.Velocity;
 			
-			return deltaVelocity;
+			return new SeekSteeringData
+			{
+				DeltaVelocity = deltaVelocity,
+				Entity = entity,
+				// Seek Specific.
+				Target = Target,
+				TargetOffset = targetOffset,
+				TargetDirection = targetDirection,
+				DesiredVelocity = desiredVelocity
+			};
 		}
 	}
 }

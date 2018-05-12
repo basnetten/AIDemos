@@ -12,16 +12,14 @@ namespace SteeringSeekDemo
 	{
 		public static void Main(string[] args)
 		{
-			var seekSteeringBehavior = new SeekSteeringBehavior
-			{
-				Target = new Vector2()
-			};
+			SeekSteeringBehavior seekSteeringBehavior = new SeekSteeringBehavior();
 			MovingEntity movingEntity = new MovingEntity
 			{
 				SteeringBehavior = seekSteeringBehavior,
 				Position = new Vector2(),
 				Velocity = new Vector2(),
 				MaxVelocity = 100,
+				Mass = 2,
 			};
 
 			Form form = new Form();
@@ -36,6 +34,8 @@ namespace SteeringSeekDemo
 			form.Paint += (sender, e) =>
 			{
 				Graphics g = e.Graphics;
+
+				// TODO Make proper viewport transform.
 				g.TranslateTransform(250, 250);
 
 				if (stopwatch == null) stopwatch = Stopwatch.StartNew();
@@ -50,7 +50,10 @@ namespace SteeringSeekDemo
 					previousUpdate = currentUpdate;
 				}
 
-				g.DrawEllipse(Pens.Black, new Rectangle((Point) (movingEntity.Position.Scale(1, -1)), new Size(10, 10)));
+				/**
+				 * Draw calls.
+				 */
+				movingEntity.Draw(g);
 
 				form.Invalidate();
 			};

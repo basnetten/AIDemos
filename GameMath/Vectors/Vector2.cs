@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using GameMath.Matrices;
 
 namespace GameMath.Vectors
@@ -52,6 +53,7 @@ namespace GameMath.Vectors
 
 		public double AngleTo(Vector2 vector)
 		{
+			// TODO Is wrong.
 			return Math.Atan2(vector.Y - Y, vector.X - X);
 		}
 
@@ -151,6 +153,15 @@ namespace GameMath.Vectors
 		public Vector2 Scale(double sx, double sy)
 		{
 			return new Vector2(X * sx, Y * sy);
+		}
+
+		public void Draw(Graphics g, Vector2 origin, Color color = new Color())
+		{
+			Pen pen = new Pen(color);
+			pen.CustomEndCap = new AdjustableArrowCap(4, 4);
+			g.DrawLine(pen,
+				(Point) origin.Scale(1, -1),
+				(Point) (this + origin).Scale(1, -1));
 		}
 	}
 }
