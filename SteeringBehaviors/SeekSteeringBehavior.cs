@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using GameMath.Vectors;
+﻿using GameMath.Vectors;
 
 namespace SteeringBehaviors
 {

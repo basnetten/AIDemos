@@ -10,6 +10,11 @@ namespace SteeringBehaviors
 	/// </summary>
 	public class SeekSteeringData : SteeringData
 	{
+		public SeekSteeringData()
+		{
+			LegendItems.Add(new LegendItem(Color.Green, "Desired Velocity"));
+		}
+
 		public Vector2 Target { get; set; }
 		public Vector2 TargetOffset { get; set; }
 		public Vector2 TargetDirection { get; set; }
@@ -24,14 +29,7 @@ namespace SteeringBehaviors
 			DrawDesiredVelocity(g);
 		}
 
-		private void DrawDesiredVelocity(Graphics g)
-		{
-			Pen desiredVelocityPen = new Pen(Color.Green);
-			desiredVelocityPen.CustomEndCap = new AdjustableArrowCap(4, 4);
-			g.DrawLine(desiredVelocityPen,
-				(Point) Entity.Position.Scale(1, -1),
-				(Point) (Entity.Position + DesiredVelocity).Scale(1, -1));
-		}
+		private void DrawDesiredVelocity(Graphics g) => DrawVector(g, Color.Green, Entity.Position, DesiredVelocity);
 
 		private void DrawTargetOffset(Graphics g)
 		{
