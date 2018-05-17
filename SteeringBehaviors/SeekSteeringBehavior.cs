@@ -11,6 +11,8 @@ namespace SteeringBehaviors
 			Target = new Vector2();
 		}
 
+		public SteeringData DataPrototype => new SeekSteeringData();
+
 		public SteeringData CalculateData(MovingEntity entity)
 		{
 			Vector2 targetOffset = Target - entity.Position;

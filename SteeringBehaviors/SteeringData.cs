@@ -6,53 +6,43 @@ using GameMath.Vectors;
 
 namespace SteeringBehaviors
 {
+	/// <summary>
+	/// A class to hold data that steering behaviors calculate. It contains the functionality to render the debug
+	/// information as well.
+	/// </summary>
 	public class SteeringData
 	{
-		public SteeringData()
-		{
-			LegendItems = new List<LegendItem>
-				{new LegendItem(Color.Aqua, "Delta Velocity")};
-		}
+		/// <summary>
+		/// The LegendItem for the DeltaVelocityVector.
+		/// </summary>
+		private static LegendItem DeltaVelocityLegendItem { get; } = new LegendItem(Color.Aqua, "Delta Velocity");
 
+		/// <summary>
+		/// The change in velocity requested.
+		/// </summary>
 		public Vector2 DeltaVelocity { get; set; }
+		
+		/// <summary>
+		/// The entity that this SteeringData was calculated for.
+		/// </summary>
 		public MovingEntity Entity { get; set; }
 
-		public List<LegendItem> LegendItems { get; }
-
+		/// <summary>
+		/// Draws the debug information of this SteeringData object.
+		/// </summary>
 		public virtual void Draw(Graphics g)
 		{
-			DrawDeltaVelocity(g);
-
-			DrawLegend(g);
+			DeltaVelocity.DrawVector(g, Color.Aqua, Entity.Position);
 		}
 
-		protected void DrawVector(Graphics g, Color color, Vector2 origin, Vector2 vector)
-		{
-			Pen pen = new Pen(color);
-			pen.CustomEndCap = new AdjustableArrowCap(4, 4);
-
-			g.DrawLine(pen, (Point) origin.Scale(1, -1), (Point) (origin + vector).Scale(1, -1));
-		}
-
-		private void DrawDeltaVelocity(Graphics g) => DrawVector(g, Color.Aqua, Entity.Position, DeltaVelocity);
-
-		private void DrawLegend(Graphics g)
-		{
-			Font font = new Font("arial", 8);
-			int yOff = 250 - 10;
-			const int xOff = 10 + -250;
-			foreach (var legendItem in LegendItems)
-			{
-				Size textSize = TextRenderer.MeasureText(legendItem.Text, font);
-				DrawVector(g, legendItem.VectorColor, new Vector2(xOff, yOff), new Vector2(20, 0));
-
-				g.DrawString(legendItem.Text,
-					font,
-					Brushes.Black,
-					xOff + 20 + 5,
-					-yOff - textSize.Height / 2);
-				yOff -= textSize.Height + 5;
-			}
-		}
+		/// <summary>
+		/// Add information about the debug drawing of this Steering data to the legend.
+		/// </summary>
+		public virtual void AddLegendItems(List<LegendItem> legend) => legend.Add(DeltaVelocityLegendItem);
+		
+		/// <summary>
+		/// Remove information about the debug drawing of this Steering data from the legend.
+		/// </summary>
+		public virtual void RemoveLegendItems(List<LegendItem> legend) => legend.Remove(DeltaVelocityLegendItem);
 	}
 }

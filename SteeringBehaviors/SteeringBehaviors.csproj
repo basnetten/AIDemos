@@ -47,6 +47,7 @@
     <Compile Include="SeekSteeringBehavior.cs" />
     <Compile Include="SeekSteeringData.cs" />
     <Compile Include="SteeringData.cs" />
+    <Compile Include="VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameMath\GameMath.csproj">

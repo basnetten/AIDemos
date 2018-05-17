@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using GameMath.Vectors;
 
@@ -10,10 +11,7 @@ namespace SteeringBehaviors
 	/// </summary>
 	public class SeekSteeringData : SteeringData
 	{
-		public SeekSteeringData()
-		{
-			LegendItems.Add(new LegendItem(Color.Green, "Desired Velocity"));
-		}
+		private static LegendItem DesiredVelocityLegendItem { get; } = new LegendItem(Color.Green, "Desired Velocity");
 
 		public Vector2 Target { get; set; }
 		public Vector2 TargetOffset { get; set; }
@@ -29,7 +27,19 @@ namespace SteeringBehaviors
 			DrawDesiredVelocity(g);
 		}
 
-		private void DrawDesiredVelocity(Graphics g) => DrawVector(g, Color.Green, Entity.Position, DesiredVelocity);
+		public override void AddLegendItems(List<LegendItem> legend)
+		{
+			base.AddLegendItems(legend);
+			legend.Add(DesiredVelocityLegendItem);
+		}
+
+		public override void RemoveLegendItems(List<LegendItem> legend)
+		{
+			base.RemoveLegendItems(legend);
+			legend.Remove(DesiredVelocityLegendItem);
+		}
+
+		private void DrawDesiredVelocity(Graphics g) => DesiredVelocity.DrawVector(g, Color.Green, Entity.Position);
 
 		private void DrawTargetOffset(Graphics g)
 		{
