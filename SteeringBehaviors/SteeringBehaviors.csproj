@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeekSteeringBehavior.cs" />
     <Compile Include="SeekSteeringData.cs" />
+    <Compile Include="SeparationSteeringBehavior.cs" />
+    <Compile Include="SeparationSteeringData.cs" />
     <Compile Include="SteeringData.cs" />
   </ItemGroup>
   <ItemGroup>

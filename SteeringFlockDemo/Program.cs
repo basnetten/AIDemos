@@ -19,8 +19,11 @@ namespace SteeringFlockDemo
 			for (int i = 0; i < NumberOfBoids; i++)
 				entities.Add(new MovingEntity
 				{
-					// SteeringBehavior = new SeekSteeringBehavior(),
-					Position = new Vector2(),
+					SteeringBehavior = new SeparationSteeringBehavior
+					{
+						Neighbors = entities
+					},
+					Position = new Vector2(i, i),
 					Velocity = new Vector2(),
 					MaxVelocity = 100,
 					Mass = 2,
