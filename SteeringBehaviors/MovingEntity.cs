@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GameMath.Matrices;
 using GameMath.Vectors;
+using SteeringBehaviors.Extensions;
 
 namespace SteeringBehaviors
 {
@@ -104,7 +105,7 @@ namespace SteeringBehaviors
 			foreach (var legendItem in Legend)
 			{
 				Size textSize = TextRenderer.MeasureText(legendItem.Text, font);
-				new Vector2(20, 0).DrawVector(g, legendItem.VectorColor, new Vector2(xOff, yOff));
+				g.DrawVector(new Vector2(20,0), new Vector2(xOff, yOff), legendItem.VectorColor);
 
 				g.DrawString(legendItem.Text,
 					font,

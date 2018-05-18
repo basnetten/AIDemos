@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="ISteeringBehavior.cs" />
     <Compile Include="LegendItem.cs" />
     <Compile Include="MovingEntity.cs" />
@@ -47,7 +48,6 @@
     <Compile Include="SeekSteeringBehavior.cs" />
     <Compile Include="SeekSteeringData.cs" />
     <Compile Include="SteeringData.cs" />
-    <Compile Include="VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameMath\GameMath.csproj">

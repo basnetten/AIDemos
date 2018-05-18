@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using GameMath.Vectors;
+using SteeringBehaviors.Extensions;
 
 namespace SteeringBehaviors
 {
@@ -39,7 +40,7 @@ namespace SteeringBehaviors
 			legend.Remove(DesiredVelocityLegendItem);
 		}
 
-		private void DrawDesiredVelocity(Graphics g) => DesiredVelocity.DrawVector(g, Color.Green, Entity.Position);
+		private void DrawDesiredVelocity(Graphics g) => g.DrawVector(DesiredVelocity, Entity.Position, Color.Green);
 
 		private void DrawTargetOffset(Graphics g)
 		{

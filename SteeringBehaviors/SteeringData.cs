@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using GameMath.Vectors;
+using SteeringBehaviors.Extensions;
 
 namespace SteeringBehaviors
 {
@@ -21,7 +22,7 @@ namespace SteeringBehaviors
 		/// The change in velocity requested.
 		/// </summary>
 		public Vector2 DeltaVelocity { get; set; }
-		
+
 		/// <summary>
 		/// The entity that this SteeringData was calculated for.
 		/// </summary>
@@ -30,16 +31,13 @@ namespace SteeringBehaviors
 		/// <summary>
 		/// Draws the debug information of this SteeringData object.
 		/// </summary>
-		public virtual void Draw(Graphics g)
-		{
-			DeltaVelocity.DrawVector(g, Color.Aqua, Entity.Position);
-		}
+		public virtual void Draw(Graphics g) => g.DrawVector(DeltaVelocity, Entity.Position, Color.Aqua);
 
 		/// <summary>
 		/// Add information about the debug drawing of this Steering data to the legend.
 		/// </summary>
 		public virtual void AddLegendItems(List<LegendItem> legend) => legend.Add(DeltaVelocityLegendItem);
-		
+
 		/// <summary>
 		/// Remove information about the debug drawing of this Steering data from the legend.
 		/// </summary>
