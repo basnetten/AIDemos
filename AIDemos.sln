@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteeringBehaviors", "Steeri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMath", "GameMath\GameMath.csproj", "{AF6623EC-0195-4A93-8991-21356D98A9BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteeringFlockDemo", "SteeringFlockDemo\SteeringFlockDemo.csproj", "{566D12F9-E444-4CBE-A839-E861BAC21CDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AF6623EC-0195-4A93-8991-21356D98A9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF6623EC-0195-4A93-8991-21356D98A9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF6623EC-0195-4A93-8991-21356D98A9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566D12F9-E444-4CBE-A839-E861BAC21CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566D12F9-E444-4CBE-A839-E861BAC21CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566D12F9-E444-4CBE-A839-E861BAC21CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566D12F9-E444-4CBE-A839-E861BAC21CDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
