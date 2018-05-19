@@ -6,8 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using GameMath.Vectors;
 using SteeringBehaviors;
-using SteeringBehaviors.Behaviors.Cohesion;
-using SteeringBehaviors.Behaviors.Separation;
+using SteeringBehaviors.Behaviors.Allign;
 
 namespace SteeringFlockDemo
 {
@@ -18,19 +17,19 @@ namespace SteeringFlockDemo
 		public static void Main(string[] args)
 		{
 			var entities = new List<MovingEntity>();
-			double step = 360d / NumberOfBoids;
+			double step = 360d / NumberOfBoids / 2;
 			for (int i = 0; i < NumberOfBoids; i++)
 			{
 				var currentAngle = i * step * (Math.PI / 180);
 				var movingEntity = new MovingEntity
 				{
 					Position = new Vector2(Math.Cos(currentAngle), Math.Sin(currentAngle)) * 75,
-					Velocity = new Vector2(),
+					Velocity = new Vector2(Math.Cos(currentAngle), Math.Sin(currentAngle)) * 10,
 					MaxVelocity = 100,
 					Mass = 2,
 				};
 				entities.Add(movingEntity);
-				if (i == 0) movingEntity.SteeringBehavior = new CohesionSteeringBehavior {Neighbors = entities};
+				if (i >= 0) movingEntity.SteeringBehavior = new AllignSteeringBehavior {Neighbors = entities};
 			}
 
 			var form = new Form

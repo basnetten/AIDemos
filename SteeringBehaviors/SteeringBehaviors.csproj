@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\Allign\AllignSteeringBehavior.cs" />
+    <Compile Include="Behaviors\Allign\AllignSteeringData.cs" />
     <Compile Include="Behaviors\Cohesion\CohesionSteeringBehavior.cs" />
     <Compile Include="Behaviors\Cohesion\CohesionSteeringData.cs" />
     <Compile Include="Behaviors\ISteeringBehavior.cs" />
