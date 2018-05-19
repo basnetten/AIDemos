@@ -6,11 +6,6 @@ namespace SteeringBehaviors.Behaviors.Separation
 {
 	public class SeparationSteeringBehavior : ISteeringBehavior
 	{
-		public SeparationSteeringBehavior()
-		{
-			Neighbors = new List<MovingEntity>();
-		}
-
 		public SteeringData DataPrototype { get; } = new SeparationSteeringData();
 
 		public SteeringData CalculateData(MovingEntity entity)
