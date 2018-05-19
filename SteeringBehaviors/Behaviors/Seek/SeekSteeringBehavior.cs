@@ -15,21 +15,24 @@ namespace SteeringBehaviors.Behaviors.Seek
 
 		public SteeringData CalculateData(MovingEntity entity)
 		{
+			return CalculateData(entity, new SeekSteeringData());
+		}
+
+		public SteeringData CalculateData(MovingEntity entity, SeekSteeringData data)
+		{
 			Vector2 targetOffset = Target - entity.Position;
 			Vector2 targetDirection = targetOffset.Normalize();
 			Vector2 desiredVelocity = targetDirection * entity.MaxVelocity;
 			Vector2 deltaVelocity = desiredVelocity - entity.Velocity;
 			
-			return new SeekSteeringData
-			{
-				DeltaVelocity = deltaVelocity,
-				Entity = entity,
-				// Seek Specific.
-				Target = Target,
-				TargetOffset = targetOffset,
-				TargetDirection = targetDirection,
-				DesiredVelocity = desiredVelocity
-			};
+			data.DeltaVelocity = deltaVelocity;
+			data.Entity = entity;
+			data.Target = Target;
+			data.TargetOffset = targetOffset;
+			data.TargetDirection = targetDirection;
+			data.DesiredVelocity = desiredVelocity;
+			
+			return data;
 		}
 	}
 }
