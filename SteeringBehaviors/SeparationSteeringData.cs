@@ -15,7 +15,7 @@ namespace SteeringBehaviors
 		{
 			base.Draw(g);
 			foreach (Vector2 force in NeighborForces)
-				g.DrawVector(force, Entity.Position, Color.Green);
+				g.DrawVector(force * 25, Entity.Position, Color.Green);
 		}
 
 		public override void AddLegendItems(List<LegendItem> legend)

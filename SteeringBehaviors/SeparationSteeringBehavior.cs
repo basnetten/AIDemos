@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameMath.Vectors;
 
 namespace SteeringBehaviors
@@ -24,16 +25,15 @@ namespace SteeringBehaviors
 
 				Vector2 toNeighbor = (position - neighbor.Position);
 				double distToNeighbor = toNeighbor.MagnitudePythagorean();
-				
+
 				if (distToNeighbor > 100) continue;
 				// Prevent accidental /0 errors.
 				if (distToNeighbor == 0) continue;
-				Vector2 neighborForce = toNeighbor.Normalize() / distToNeighbor;
+				Vector2 neighborForce = toNeighbor.Normalize() / (distToNeighbor/50);
 				forces.Add(neighborForce);
 				force += neighborForce;
+				Console.WriteLine(force);
 			}
-
-			force *= 10;
 
 			return new SeparationSteeringData
 			{

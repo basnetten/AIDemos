@@ -16,18 +16,22 @@ namespace SteeringFlockDemo
 		public static void Main(string[] args)
 		{
 			var entities = new List<MovingEntity>();
+			double step = 360d / NumberOfBoids;
 			for (int i = 0; i < NumberOfBoids; i++)
+			{
+				var currentAngle = i * step * (Math.PI / 180);
 				entities.Add(new MovingEntity
 				{
 					SteeringBehavior = new SeparationSteeringBehavior
 					{
 						Neighbors = entities
 					},
-					Position = new Vector2(i, i),
+					Position = new Vector2(Math.Cos(currentAngle), Math.Sin(currentAngle)),
 					Velocity = new Vector2(),
 					MaxVelocity = 100,
 					Mass = 2,
 				});
+			}
 
 			var form = new Form
 			{
