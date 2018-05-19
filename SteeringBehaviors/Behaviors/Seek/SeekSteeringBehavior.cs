@@ -1,6 +1,6 @@
 ﻿using GameMath.Vectors;
 
-namespace SteeringBehaviors
+namespace SteeringBehaviors.Behaviors.Seek
 {
 	public class SeekSteeringBehavior : ISteeringBehavior
 	{

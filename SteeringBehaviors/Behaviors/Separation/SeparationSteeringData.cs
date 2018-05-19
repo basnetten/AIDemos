@@ -3,7 +3,7 @@ using System.Drawing;
 using GameMath.Vectors;
 using SteeringBehaviors.Extensions;
 
-namespace SteeringBehaviors
+namespace SteeringBehaviors.Behaviors.Separation
 {
 	public class SeparationSteeringData : SteeringData
 	{

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using GameMath.Vectors;
 using SteeringBehaviors;
+using SteeringBehaviors.Behaviors.Separation;
 
 namespace SteeringFlockDemo
 {

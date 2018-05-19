@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using GameMath.Matrices;
 using GameMath.Vectors;
+using SteeringBehaviors.Behaviors;
 using SteeringBehaviors.Extensions;
 
 namespace SteeringBehaviors

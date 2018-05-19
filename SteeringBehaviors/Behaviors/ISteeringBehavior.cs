@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using GameMath.Vectors;
-
-namespace SteeringBehaviors
+﻿namespace SteeringBehaviors.Behaviors
 {
 	public interface ISteeringBehavior
 	{

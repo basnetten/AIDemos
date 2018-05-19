@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 using GameMath.Vectors;
 using SteeringBehaviors.Extensions;
 
-namespace SteeringBehaviors
+namespace SteeringBehaviors.Behaviors.Seek
 {
 	/// <summary>
 	/// A class to hold the data from the seek steering behavior. It also contains all the debug drawing code for the

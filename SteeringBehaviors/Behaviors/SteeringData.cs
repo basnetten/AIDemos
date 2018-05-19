@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 using GameMath.Vectors;
 using SteeringBehaviors.Extensions;
 
-namespace SteeringBehaviors
+namespace SteeringBehaviors.Behaviors
 {
 	/// <summary>
 	/// A class to hold data that steering behaviors calculate. It contains the functionality to render the debug

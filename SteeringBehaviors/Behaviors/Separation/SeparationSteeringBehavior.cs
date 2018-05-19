@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GameMath.Vectors;
 
-namespace SteeringBehaviors
+namespace SteeringBehaviors.Behaviors.Separation
 {
 	public class SeparationSteeringBehavior : ISteeringBehavior
 	{
