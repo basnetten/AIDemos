@@ -44,6 +44,7 @@
     <Compile Include="Behaviors\Allign\AllignSteeringData.cs" />
     <Compile Include="Behaviors\Cohesion\CohesionSteeringBehavior.cs" />
     <Compile Include="Behaviors\Cohesion\CohesionSteeringData.cs" />
+    <Compile Include="Behaviors\CompositeSteeringBehavior.cs" />
     <Compile Include="Behaviors\ISteeringBehavior.cs" />
     <Compile Include="Behaviors\Seek\SeekSteeringBehavior.cs" />
     <Compile Include="Behaviors\Seek\SeekSteeringData.cs" />
