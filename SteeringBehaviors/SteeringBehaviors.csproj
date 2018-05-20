@@ -51,6 +51,8 @@
     <Compile Include="Behaviors\Separation\SeparationSteeringBehavior.cs" />
     <Compile Include="Behaviors\Separation\SeparationSteeringData.cs" />
     <Compile Include="Behaviors\SteeringData.cs" />
+    <Compile Include="Behaviors\Wander\WanderSteeringBehavior.cs" />
+    <Compile Include="Behaviors\Wander\WanderSteeringData.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="LegendItem.cs" />
     <Compile Include="MovingEntity.cs" />

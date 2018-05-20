@@ -60,7 +60,7 @@ namespace SteeringBehaviors
 		{
 			var calculateData = SteeringBehavior?.CalculateData(this);
 			LastSteeringData = calculateData;
-			Vector2 a = calculateData?.DeltaVelocity ?? new Vector2();
+			Vector2 a = (calculateData?.DeltaVelocity ?? new Vector2()).Truncate(MaxVelocity);
 			a /= Mass;
 			Velocity += a * deltaTimeS;
 			Position += Velocity * deltaTimeS;

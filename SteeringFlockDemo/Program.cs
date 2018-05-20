@@ -9,22 +9,31 @@ using SteeringBehaviors;
 using SteeringBehaviors.Behaviors;
 using SteeringBehaviors.Behaviors.Allign;
 using SteeringBehaviors.Behaviors.Seek;
+using SteeringBehaviors.Behaviors.Wander;
 
 namespace SteeringFlockDemo
 {
 	internal class Program
 	{
-		private const int NumberOfBoids = 10;
+		private const int NumberOfBoids = 1;
 
 		public static void Main(string[] args)
 		{
 			var entities = new List<MovingEntity>();
 			double step = 360d / NumberOfBoids / 2;
-			var flock = new CompositeSteeringBehavior(entities);
-			flock.Separation.Weight = 2d;
-			flock.Allign.Weight = 1d;
-			flock.Cohesion.Weight = 1d;
-			((SeekSteeringBehavior) flock.Seek.Behavior).Target = new Vector2(200, 100);
+			var flock = new WanderSteeringBehavior
+			{
+				WanderTarget = new Vector2(-1,0),
+				WanderDistance = 10,
+				WanderJitter = 1,
+				WanderRadius = 50,
+			};
+			
+//			var flock = new CompositeSteeringBehavior(entities);
+//			flock.Separation.Weight = 2d;
+//			flock.Allign.Weight = 1d;
+//			flock.Cohesion.Weight = 1d;
+//			((SeekSteeringBehavior) flock.Seek.Behavior).Target = new Vector2(200, 100);
 
 			for (int i = 0; i < NumberOfBoids; i++)
 			{
@@ -36,6 +45,7 @@ namespace SteeringFlockDemo
 					MaxVelocity = 100,
 					Mass = 2,
 				};
+				
 				entities.Add(movingEntity);
 				if (i >= 0)
 				{
