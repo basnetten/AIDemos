@@ -8,7 +8,7 @@ namespace SteeringBehaviors.Behaviors.Cohesion
 	{
 		public SteeringData DataPrototype { get; } = new CohesionSteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
 			var centerOfMass = new Vector2();
 

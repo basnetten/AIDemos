@@ -22,32 +22,32 @@ namespace SteeringBehaviors.Behaviors
 
 		public SteeringData DataPrototype { get; } = new SteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
 			Vector2 total = new Vector2();
 
 			if (Allign.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
 			{
 				Console.WriteLine("Allign");
-				total += Allign.Behavior.CalculateData(entity).DeltaVelocity * Allign.Weight;
+				total += Allign.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Allign.Weight;
 			}
 
 			if (Separation.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
 			{
 				Console.WriteLine("Separation");
-				total += Separation.Behavior.CalculateData(entity).DeltaVelocity * Separation.Weight;
+				total += Separation.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Separation.Weight;
 			}
 
 			if (Cohesion.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
 			{
 				Console.WriteLine("Cohesion");
-				total += Cohesion.Behavior.CalculateData(entity).DeltaVelocity * Cohesion.Weight;
+				total += Cohesion.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Cohesion.Weight;
 			}
 
 			if (Seek.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
 			{
 				Console.WriteLine("Seek");
-				total += Seek.Behavior.CalculateData(entity).DeltaVelocity * Seek.Weight;
+				total += Seek.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Seek.Weight;
 			}
 
 			return new SteeringData

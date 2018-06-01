@@ -13,12 +13,14 @@ namespace SteeringBehaviors.Behaviors.Wander
 		private Random _random;
 		public SteeringData DataPrototype { get; } = new WanderSteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
-			Console.WriteLine(RandomClamped());
+			Console.WriteLine(WanderTarget);
 			
 			// Randomize.
-			WanderTarget += new Vector2(RandomClamped() * WanderJitter, RandomClamped() * WanderJitter);
+			WanderTarget += new Vector2(
+				RandomClamped() * WanderJitter * deltaTimeS, 
+				RandomClamped() * WanderJitter * deltaTimeS);
 			WanderTarget = WanderTarget.Normalize();
 
 			WanderTarget *= WanderRadius;

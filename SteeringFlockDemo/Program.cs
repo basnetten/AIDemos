@@ -24,9 +24,9 @@ namespace SteeringFlockDemo
 			var flock = new WanderSteeringBehavior
 			{
 				WanderTarget = new Vector2(-1,0),
-				WanderDistance = 10,
-				WanderJitter = 1,
-				WanderRadius = 50,
+				WanderDistance = 50,
+				WanderJitter = 2000,
+				WanderRadius = 25,
 			};
 			
 //			var flock = new CompositeSteeringBehavior(entities);
@@ -42,8 +42,9 @@ namespace SteeringFlockDemo
 				{
 					Position = new Vector2(Math.Cos(currentAngle), Math.Sin(currentAngle)) * 75,
 					Velocity = new Vector2(Math.Cos(currentAngle), Math.Sin(currentAngle)) * 10,
-					MaxVelocity = 100,
-					Mass = 2,
+					MaxVelocity = 10,
+					MaxForce = 10,
+					Mass = 1,
 				};
 				
 				entities.Add(movingEntity);

@@ -19,6 +19,7 @@ namespace SteeringBehaviors
 		// Y axis flipped for rendering.
 		public Vector2 RenderPosition => Position.Scale(1, -1);
 		public double MaxVelocity { get; set; }
+		public double MaxForce { get; set; }
 		public Vector2 Velocity { get; set; }
 
 		public double Mass { get; set; }
@@ -58,11 +59,12 @@ namespace SteeringBehaviors
 
 		public void Update(double deltaTimeS)
 		{
-			var calculateData = SteeringBehavior?.CalculateData(this);
+			var calculateData = SteeringBehavior?.CalculateData(this, deltaTimeS);
 			LastSteeringData = calculateData;
-			Vector2 a = (calculateData?.DeltaVelocity ?? new Vector2()).Truncate(MaxVelocity);
+			Vector2 a = (calculateData?.DeltaVelocity ?? new Vector2()).Truncate(MaxForce);
 			a /= Mass;
 			Velocity += a * deltaTimeS;
+			Velocity = Velocity.Truncate(MaxVelocity);
 			Position += Velocity * deltaTimeS;
 		}
 

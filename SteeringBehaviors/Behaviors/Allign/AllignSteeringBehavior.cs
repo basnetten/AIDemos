@@ -7,7 +7,7 @@ namespace SteeringBehaviors.Behaviors.Allign
 	{
 		public SteeringData DataPrototype { get; } = new AllignSteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
 			var averageHeading = new Vector2();
 			int handledNeighborCount = 0;

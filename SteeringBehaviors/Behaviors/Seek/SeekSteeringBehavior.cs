@@ -13,7 +13,7 @@ namespace SteeringBehaviors.Behaviors.Seek
 
 		public SteeringData DataPrototype => new SeekSteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
 			return CalculateData(entity, new SeekSteeringData());
 		}

@@ -4,6 +4,6 @@
 	{
 		SteeringData DataPrototype { get; }
 		
-		SteeringData CalculateData(MovingEntity entity);
+		SteeringData CalculateData(MovingEntity entity, double deltaTimeS);
 	}
 }

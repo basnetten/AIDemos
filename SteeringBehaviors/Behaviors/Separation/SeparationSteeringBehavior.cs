@@ -8,7 +8,7 @@ namespace SteeringBehaviors.Behaviors.Separation
 	{
 		public SteeringData DataPrototype { get; } = new SeparationSteeringData();
 
-		public SteeringData CalculateData(MovingEntity entity)
+		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
 			var force = new Vector2();
 			var position = entity.Position;
