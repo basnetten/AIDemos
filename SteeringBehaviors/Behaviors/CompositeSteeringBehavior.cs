@@ -1,23 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameMath.Vectors;
 using SteeringBehaviors.Behaviors.Allign;
 using SteeringBehaviors.Behaviors.Cohesion;
-using SteeringBehaviors.Behaviors.Seek;
 using SteeringBehaviors.Behaviors.Separation;
+using SteeringBehaviors.Behaviors.Wander;
 
 namespace SteeringBehaviors.Behaviors
 {
 	public class CompositeSteeringBehavior : ISteeringBehavior
 	{
+		
+		public static int AllignCount     = 0;
+		public static int CohesionCount   = 0;
+		public static int SeparationCount = 0;
+		public static int WanderCount     = 0;
+
+		
 		public CompositeSteeringBehavior(List<MovingEntity> neighbors)
 		{
 			Neighbors = neighbors;
 
 			Separation = new X(new SeparationSteeringBehavior {Neighbors = Neighbors});
-			Cohesion = new X(new CohesionSteeringBehavior {Neighbors = Neighbors});
-			Allign = new X(new AllignSteeringBehavior {Neighbors = Neighbors});
-			Seek = new X(new SeekSteeringBehavior {Target = new Vector2()});
+			Cohesion   = new X(new CohesionSteeringBehavior {Neighbors   = Neighbors});
+			Allign     = new X(new AllignSteeringBehavior {Neighbors     = Neighbors});
+			Wander = new X(new WanderSteeringBehavior
+			{
+				WanderTarget = new Vector2(),
+				WanderDistance = 50,
+				WanderJitter   = 2000,
+				WanderRadius   = 25,
+			});
 		}
 
 		public SteeringData DataPrototype { get; } = new SteeringData();
@@ -26,41 +38,45 @@ namespace SteeringBehaviors.Behaviors
 		{
 			Vector2 total = new Vector2();
 
-			if (Allign.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
+			if (Allign.Enabled && total.MagnitudePythagorean() < entity.MaxForce)
 			{
-				Console.WriteLine("Allign");
+				AllignCount++;
+//				Console.WriteLine("Allign");
 				total += Allign.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Allign.Weight;
 			}
 
-			if (Separation.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
+			if (Separation.Enabled && total.MagnitudePythagorean() < entity.MaxForce)
 			{
-				Console.WriteLine("Separation");
+				SeparationCount++;
+//				Console.WriteLine("Separation");
 				total += Separation.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Separation.Weight;
 			}
 
-			if (Cohesion.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
+			if (Cohesion.Enabled && total.MagnitudePythagorean() < entity.MaxForce)
 			{
-				Console.WriteLine("Cohesion");
+				CohesionCount++;
+//				Console.WriteLine("Cohesion");
 				total += Cohesion.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Cohesion.Weight;
 			}
 
-			if (Seek.Enabled && total.MagnitudePythagorean() < entity.MaxVelocity)
+			if (Wander.Enabled && total.MagnitudePythagorean() < entity.MaxForce)
 			{
-				Console.WriteLine("Seek");
-				total += Seek.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Seek.Weight;
+				WanderCount++;
+//				Console.WriteLine("Seek");
+				total += Wander.Behavior.CalculateData(entity, deltaTimeS).DeltaVelocity * Wander.Weight;
 			}
 
 			return new SteeringData
 			{
 				DeltaVelocity = total,
-				Entity = entity,
+				Entity        = entity,
 			};
 		}
 
-		public X Allign { get; }
-		public X Cohesion { get; }
+		public X Allign     { get; }
+		public X Cohesion   { get; }
 		public X Separation { get; }
-		public X Seek { get; }
+		public X Wander     { get; }
 
 		public List<MovingEntity> Neighbors { get; }
 
@@ -68,13 +84,13 @@ namespace SteeringBehaviors.Behaviors
 		{
 			public X(ISteeringBehavior behavior)
 			{
-				Enabled = true;
-				Weight = 1d;
+				Enabled  = true;
+				Weight   = 1d;
 				Behavior = behavior;
 			}
 
-			public bool Enabled { get; set; }
-			public double Weight { get; set; }
+			public bool              Enabled  { get; set; }
+			public double            Weight   { get; set; }
 			public ISteeringBehavior Behavior { get; set; }
 		}
 	}

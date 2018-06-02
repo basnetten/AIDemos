@@ -15,7 +15,7 @@ namespace SteeringBehaviors.Behaviors.Wander
 
 		public SteeringData CalculateData(MovingEntity entity, double deltaTimeS)
 		{
-			Console.WriteLine(WanderTarget);
+//			Console.WriteLine(WanderTarget);
 			
 			// Randomize.
 			WanderTarget += new Vector2(

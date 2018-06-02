@@ -11,16 +11,16 @@ namespace SteeringBehaviors
 {
 	public class MovingEntity
 	{
-		private static LegendItem VelocityLegendItem { get; } = new LegendItem(Color.Black, "Velocity");
-		private ISteeringBehavior _steeringBehavior;
+		private static LegendItem        VelocityLegendItem { get; } = new LegendItem(Color.Black, "Velocity");
+		private        ISteeringBehavior _steeringBehavior;
 
 		public Vector2 Position { get; set; }
 
 		// Y axis flipped for rendering.
 		public Vector2 RenderPosition => Position.Scale(1, -1);
-		public double MaxVelocity { get; set; }
-		public double MaxForce { get; set; }
-		public Vector2 Velocity { get; set; }
+		public double  MaxVelocity    { get; set; }
+		public double  MaxForce       { get; set; }
+		public Vector2 Velocity       { get; set; }
 
 		public double Mass { get; set; }
 
@@ -48,10 +48,10 @@ namespace SteeringBehaviors
 			Lines = new List<Vector2>();
 
 			// Initlialize as triangle.
-			Lines.Add(new Vector2(50, 0));
-			Lines.Add(new Vector2(-25, -25));
-			Lines.Add(new Vector2(-25, 25));
-			Lines.Add(new Vector2(50, 0));
+			Lines.Add(new Vector2(10,  0));
+			Lines.Add(new Vector2(-5, -5));
+			Lines.Add(new Vector2(-5, 5));
+			Lines.Add(new Vector2(10,  0));
 
 			Legend = new List<LegendItem>();
 			AddLegendItems(Legend);
@@ -62,22 +62,25 @@ namespace SteeringBehaviors
 			var calculateData = SteeringBehavior?.CalculateData(this, deltaTimeS);
 			LastSteeringData = calculateData;
 			Vector2 a = (calculateData?.DeltaVelocity ?? new Vector2()).Truncate(MaxForce);
-			a /= Mass;
+			a        /= Mass;
 			Velocity += a * deltaTimeS;
-			Velocity = Velocity.Truncate(MaxVelocity);
+			Velocity =  Velocity.Truncate(MaxVelocity);
 			Position += Velocity * deltaTimeS;
+
+			if (Position.X <= -250 || 250 <= Position.X) Position = Position.Scale(-1, 1);
+			if (Position.Y <= -250 || 250 <= Position.Y) Position = Position.Scale(1,  -1);
 		}
 
 		public void Draw(Graphics g)
 		{
 			// Allow the steering to draw its debug info.
-			LastSteeringData?.Draw(g);
+			// LastSteeringData?.Draw(g);
 
 			// Calculate the heading of the entity.
 			double th = Math.Atan2(0, 1) - Math.Atan2(Heading.Y, Heading.X);
 
 			// Rotate and transform all the points.
-			Matrix3 rotMat = MatrixBuilder.RotationMatrix(th);
+			Matrix3     rotMat      = MatrixBuilder.RotationMatrix(th);
 			List<Point> transformed = new List<Point>();
 			foreach (var vector2 in Lines)
 			{
@@ -88,33 +91,33 @@ namespace SteeringBehaviors
 			}
 
 			// Draw the velocity vector.
-			Velocity.Draw(g, Position, Color.Black);
+			// Velocity.Draw(g, Position, Color.Black);
 
 			// Draw the lines of the entity.
 			g.DrawLines(Pens.Black, transformed.ToArray());
 
 			// Draw the legend.
-			DrawLegend(g);
+			// DrawLegend(g);
 		}
 
-		public void AddLegendItems(List<LegendItem> legend) => legend.Add(VelocityLegendItem);
+		public void AddLegendItems(List<LegendItem>    legend) => legend.Add(VelocityLegendItem);
 		public void RemoveLegendItems(List<LegendItem> legend) => legend.Remove(VelocityLegendItem);
 
 		private void DrawLegend(Graphics g)
 		{
-			Font font = new Font("arial", 8);
-			int yOff = 250 - 10;
+			Font      font = new Font("arial", 8);
+			int       yOff = 250 - 10;
 			const int xOff = 10 + -250;
 			foreach (var legendItem in Legend)
 			{
 				Size textSize = TextRenderer.MeasureText(legendItem.Text, font);
-				g.DrawVector(new Vector2(20,0), new Vector2(xOff, yOff), legendItem.VectorColor);
+				g.DrawVector(new Vector2(20, 0), new Vector2(xOff, yOff), legendItem.VectorColor);
 
 				g.DrawString(legendItem.Text,
 					font,
 					Brushes.Black,
 					xOff + 20 + 5,
-					-yOff - textSize.Height / 2);
+					-yOff     - textSize.Height / 2);
 				yOff -= textSize.Height + 5;
 			}
 		}

@@ -27,7 +27,7 @@ namespace SteeringBehaviors.Behaviors.Separation
 				Vector2 neighborForce = toNeighbor.Normalize() / (distToNeighbor/50);
 				forces.Add(neighborForce);
 				force += neighborForce;
-				Console.WriteLine(force);
+//				Console.WriteLine(force);
 			}
 
 			return new SeparationSteeringData
